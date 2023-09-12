@@ -1,8 +1,11 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Montserrat, Roboto, Poppins } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-montserrat' })
+// const roboto = Roboto({ subsets: ['latin'], display: 'swap' , weight: ['400', '700'], variable: '--font-roboto'})
+// const poppins = Poppins({ subsets: ['latin'], display: 'swap' , weight: ['400', '700'], variable: '--font-poppins'})
+
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={montserrat.className}>{children}</body>
+      
     </html>
   )
 }

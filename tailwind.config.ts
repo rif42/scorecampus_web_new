@@ -12,6 +12,13 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'saturdaysuperheroes': 'url("/images/saturday-superheroes.png")',
+        'educationsupport': 'url("/images/educationsupport.png")',
+
+      },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+        // montserrat : ['var(--font-montserrat)'],
       },
     },
   },
