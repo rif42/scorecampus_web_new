@@ -31,7 +31,7 @@ const MapIntegration = () => {
 
 function Form() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(e, "form submitted")
+    console.log(e, "form submitted");
     e.preventDefault();
     // Add your form submission logic here
   };
@@ -85,7 +85,7 @@ function Form() {
         id="submit"
         type="submit"
         value="Submit"
-        className="mt-6 flex h-10 w-40 flex-row items-center justify-center rounded-md bg-[#2F4DC4] text-base font-semibold"
+        className="mt-10 flex h-10 w-40 flex-row items-center justify-center rounded-md bg-[#DF4787]  text-base font-semibold"
       />
     </form>
   );
@@ -95,17 +95,18 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       <div className="flex h-[100vh] flex-col items-center justify-center text-center ">
-        <div className="flex min-w-[65rem] max-w-[50vw] place-content-center self-center ">
-          <div className="mr-10 flex w-[30%] flex-col place-content-center self-center">
+        <div className="flex min-w-[60rem] max-w-[50vw] flex-col place-content-center self-center lg:flex-row">
+          <div className="flex w-full flex-col place-content-center self-center lg:mr-10 lg:w-[30%]">
             <div className="flex justify-center align-middle">
               <Image
                 alt="Hero Image"
                 src="/images/heroes.png"
                 height={350}
                 width={350}
+                className="flex w-[60%]"
               />
             </div>
-            <div className="flex flex-row justify-around  align-middle ">
+            <div className="flex flex-row justify-center align-middle lg:justify-around ">
               <Image
                 alt="Scorecampus icon"
                 src="/images/sc-icon.png"
@@ -121,39 +122,41 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="flex w-[70%] flex-col place-content-center self-center pr-10 pt-8">
-            <h1 className="flex text-left text-6xl font-extrabold">
+          <div className="flex w-[70%] flex-col items-center self-center pt-8 lg:pr-10">
+            <h1 className="flex text-6xl font-extrabold lg:self-start">
               SCORE CAMPUS.
             </h1>
-            <h2 className="flex text-left text-6xl ">Education Reinvented.</h2>
-            <p className="flex pt-4 text-left text-lg">
+            <h2 className="flex text-6xl lg:self-start ">
+              Education Reinvented.
+            </h2>
+            <p className="flex pt-4 text-lg lg:text-left">
               Level up and power up the Everyday Superhero* in your child! SCORE
               CAMPUS LIVE offers PERFORMANCE COACHING and EDUCATIONAL CAMPS
               equip your child with a perfect mix of academics, grit, character
               and skills to stand out and reach his/ her highest potential.
             </p>
 
-            <p className="flex pt-4 text-left text-2xl font-bold">
+            <p className="flex pt-4 text-2xl font-bold lg:text-left">
               We do not just prepare children to get good grades. We prepare
               them to succeed in life.
             </p>
 
-            <div className="flex flex-row gap-2 self-start pt-4">
-              <button className="flex h-10 w-56 flex-col items-center justify-center rounded-md bg-blue-500 font-semibold">
+            <div className="flex flex-row gap-2 pt-4 lg:self-start">
+              <button className="flex h-10 w-52 flex-col items-center justify-center rounded-md bg-blue-500 font-semibold">
                 ScoreCampus Live
               </button>
-              <button className="flex h-10 w-64 flex-col items-center justify-center rounded-md bg-red-500 font-semibold">
+              <button className="flex h-10 w-52 flex-col items-center justify-center rounded-md bg-red-500 font-semibold">
                 ScoreCampus Connect
               </button>
-              <button className="flex h-10 w-56 flex-col items-center justify-center rounded-md bg-yellow-500 font-semibold">
+              <button className="flex h-10 w-52 flex-col items-center justify-center rounded-md bg-yellow-500 font-semibold">
                 ScoreCampus Pro
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex h-[40vh] flex-col items-center justify-center bg-white text-center align-middle">
-        <h2 className="flex text-left text-6xl font-extrabold text-[#3D2C93]">
+      <div className="flex py-[5%] flex-col items-center justify-center bg-white text-center align-middle">
+        <h2 className="flex text-center text-6xl font-extrabold text-[#3D2C93]">
           Score Campus Live
         </h2>
         <p className="flex py-6 text-lg text-black">
@@ -164,15 +167,15 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="flex h-[50vh] flex-row justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787]">
-        <div className="flex h-[40vh] w-[50vw] flex-row justify-center place-self-center ">
-          <div className="flex w-[33%] flex-col items-center justify-center  px-4 align-middle text-5xl font-extrabold">
+      <div className="flex py-[10%] justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] ]">
+        <div className="flex w-[80%] flex-col justify-center place-self-center lg:flex-row lg:w-[60vw] ">
+          <div className="flex flex-col items-center justify-center px-4 text-center align-middle  text-5xl font-extrabold lg:w-[33%] lg:text-left">
             Enroll your child for these ongoing programs:
-            <button className="mt-10 flex h-10 w-40 flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold">
+            <button className="mb-6 mt-10 flex h-10 w-40 flex-row items-center justify-center self-center rounded-md bg-[#2F4DC4] text-base font-semibold lg:self-start">
               <BsFillTelephoneFill className="mr-2" /> Contact Us
             </button>
           </div>
-          <div className="flex w-[34%] flex-col items-start justify-center border-x-[5px] border-dotted border-white px-4">
+          <div className="flex flex-col items-start justify-center border-x-[0px] border-y-[5px] border-dotted border-white px-4 py-8 lg:w-[34%] lg:border-x-[5px] lg:border-y-[0px] lg:py-0">
             <p className="text-lg">Weekdays!</p>
             <h2 className="flex pt-2 text-3xl font-bold">Academic coaching</h2>
             <p className="pt-4 text-lg">
@@ -199,7 +202,7 @@ export default function Home() {
               <FaRegLightbulb className="mr-2" /> Sign Up
             </button>
           </div>
-          <div className="flex w-[33%] flex-col items-start justify-center px-4">
+          <div className="flex flex-col items-start justify-center border-b-[5px] border-dotted border-white px-4 py-8 lg:w-[33%] lg:border-b-[0px] lg:py-0">
             <p className="text-lg">Saturday!</p>
             <h2 className="flex pt-2 text-3xl font-bold">
               Saturday Superheroes
@@ -233,30 +236,32 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex h-[50vh] flex-row justify-center bg-white">
-        <div className="flex h-[40vh] w-[50vw] flex-row items-center justify-center place-self-center">
-          <div className="flex w-[33%] flex-col items-center justify-center  px-4 align-middle text-5xl font-extrabold text-[#3D2C93]">
+      <div className="flex py-[8%] justify-center bg-white">
+        <div className="flex w-[80%] flex-col justify-center place-self-center lg:flex-row lg:w-[60vw] ">
+          <div className="flex py-12 flex-col items-center justify-center px-4 text-center align-middle  text-5xl font-extrabold text-[#3D2C93] lg:w-[33%] lg:text-left">
             Reserve a slot for these upcoming camps:
-            <button className="mt-10 flex h-10 w-40 flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold text-white">
-              <BsFillTelephoneFill className="mr-2 fill-white" /> Contact Us
+            <button className="mb-6 mt-10 flex h-10 w-40 flex-row items-center justify-center self-center rounded-md bg-[#2F4DC4] text-base font-semibold text-white lg:self-start">
+              <BsFillTelephoneFill className="mr-2" /> Contact Us
             </button>
           </div>
-          <div className="flex h-[60%] w-[34%] flex-col items-start justify-center border-x-[5px] border-dotted border-black px-4 text-black">
-            <p className="text-lg">Weekdays!</p>
+          <div className="flex flex-col items-start justify-center border-x-[0px] border-y-[5px] border-dotted border-black px-4 py-8 text-black lg:w-[34%] lg:border-x-[5px] lg:border-y-[0px] lg:py-0">
+            <p className="text-lg">
+              Happening from June 14 to 20, 2023 in Singapore & Malaysia!
+            </p>
             <h2 className="flex pt-2 text-3xl font-bold text-[#3D2C93]">
               The Next Level Camp
             </h2>
             <p className="pt-4 text-lg">
-              Bring out the champion in your child <br></br>
-              through a 5 to 7-day camp. <br></br>
+              Bring out the champion in your child through a 5 to 7-day camp.{" "}
+              <br></br>
               Recommended age: 7 to 17 years old <br></br>
             </p>
-            <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787]  font-semibold text-white">
+            <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787] font-semibold  text-white">
               <FaRegLightbulb className="mr-2" /> Sign Up
             </button>
           </div>
-          <div className="flex w-[33%] flex-col items-start justify-center px-4 text-black">
-            <p className="text-lg ">
+          <div className="flex flex-col items-start justify-center border-b-[5px] border-dotted border-black px-4 py-8 text-black lg:w-[33%] lg:border-b-[0px] lg:py-0">
+            <p className="text-lg">
               Happening from June 5 to 8, 2023 in Singapore!
             </p>
             <h2 className="flex pt-2 text-3xl font-bold text-[#3D2C93]">
@@ -267,38 +272,40 @@ export default function Home() {
               <br></br>
               Recommended age: 7 to 17 years old <br></br>
             </p>
-            <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787]  font-semibold text-white">
+
+            <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787] font-semibold  text-white">
               <FaRegLightbulb className="mr-2" /> Sign Up
             </button>
           </div>
         </div>
       </div>
 
-      <div className="flex h-[50vh] flex-row justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787]">
-        <div className="flex h-[40vh] w-[50vw] flex-row items-center justify-center place-self-center ">
-          <div className="flex w-[33%] flex-col items-center justify-center px-4 align-middle text-5xl font-extrabold">
+      <div className="flex py-[7%] justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] ">
+        <div className="flex w-[80%] flex-col justify-center place-self-center lg:flex-row lg:w-[60vw] ">
+          <div className="flex flex-col items-center justify-center px-4 text-center align-middle  text-5xl font-extrabold lg:w-[33%] lg:text-left">
             Our other programs and platforms:
-            <button className="mt-10 flex h-10 w-40 flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold">
+            <button className="mb-6 mt-10 flex h-10 w-40 flex-row items-center justify-center self-center rounded-md bg-[#2F4DC4] text-base font-semibold lg:self-start">
               <BsFillTelephoneFill className="mr-2" /> Contact Us
             </button>
           </div>
-          <div className="flex h-[50%] w-[34%] flex-col items-start justify-center border-x-[5px] border-dotted border-white px-4">
+          <div className="flex flex-col items-start justify-center border-x-[0px] border-y-[5px] border-dotted border-white px-4 py-8 lg:w-[34%] lg:border-x-[5px] lg:border-y-[0px] lg:py-0">
             <h2 className="flex pt-2 text-3xl font-bold">
               Score Campus Connect
             </h2>
             <p className="pt-4 text-lg">
-              Your one-stop shop for online learning management systems
+              Your one-stop shop for online learning management systems{" "}
+              <br></br>
             </p>
-            <div className="flex flex-row items-start gap-4">
-              <button className="mt-10 flex h-10 w-40 flex-row items-center justify-center self-start rounded-md bg-[#DF4787]  font-semibold">
+            <div className="mt-10 flex w-full flex-row flex-wrap gap-2">
+              <button className="flex h-10 w-40 flex-row items-center justify-center rounded-md bg-[#DF4787]  font-semibold">
                 <FaRegLightbulb className="mr-2" /> Get Lets Flip
               </button>
-              <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#3D2C93]  font-semibold">
+              <button className="flex h-10 w-36 flex-row items-center justify-center rounded-md bg-[#3D2C93]  font-semibold">
                 <FaRegLightbulb className="mr-2" /> SC Portal
               </button>
             </div>
           </div>
-          <div className="flex w-[33%] flex-col items-start justify-center px-4">
+          <div className="flex flex-col items-start justify-center border-b-[5px] border-dotted border-white px-4 py-8 lg:w-[33%] lg:border-b-[0px] lg:py-0">
             <h2 className="flex pt-2 text-3xl font-bold">Score Campus Pro</h2>
             <p className="pt-4 text-lg">
               Programs for teachers and aspiring education superheroes
@@ -310,15 +317,16 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex h-[50vh] items-center justify-center bg-white">
-        <div className="flex h-[65%] w-[50%] flex-row ">
-          <div className="flex w-[50%] flex-col items-center ">
+
+      <div className="flex py-[7%] items-center justify-center bg-white">
+        <div className="flex h-[65%] lg:w-[50%] items-center flex-col lg:flex-row ">
+          <div className="flex w-[70%] flex-col items-center ">
             <Image
               alt="Hero Image"
               src="/images/heroes2.png"
               height={350}
               width={350}
-              className="flex"
+              className="flex h-[60%] w-[60%]"
             />
             <p className="flex flex-row pt-2 text-center text-sm text-black">
               At Score Campus, we believe that academic excellence does NOT
@@ -327,8 +335,8 @@ export default function Home() {
               and brings out the superhero in each child.
             </p>
           </div>
-          <div className="flex w-[50%] flex-col justify-center  pl-2">
-            <h2 className="flex pt-2 text-5xl font-extrabold text-[#3D2C93]">
+          <div className="flex w-[70%] flex-col justify-center  pl-2">
+            <h2 className="flex pt-2 text-5xl lg:text-left text-center font-extrabold text-[#3D2C93]">
               Support your child to the fullest.
             </h2>
             <p className="flex flex-row py-4 text-black">
@@ -351,32 +359,32 @@ export default function Home() {
               <IoIosCheckmarkCircleOutline className="mr-1.5 h-[23px] w-[23px] fill-[#3D2C93]" />{" "}
               Gain Socio-Emotional Balance, Mental Strength, & Fitness
             </p>
-            <button className="mt-5 flex h-10 w-40 flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold">
+            <button className="my-5 flex h-10 w-40 flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold">
               <BsFillTelephoneFill className="mr-2" /> Contact Us
             </button>
           </div>
         </div>
       </div>
 
-      <div className="flex h-[40vh] flex-col items-center justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] align-middle">
-        <h2 className="flex pt-2 text-5xl font-bold">
+      <div className="flex py-[5%] flex-col items-center justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] align-middle">
+        <h2 className="flex pt-2 text-5xl text-center font-bold">
           “The highest form of research is essentially play.”
         </h2>
         <p className="pt-4 text-2xl">~ N. V. Scarfe, education researcher</p>
       </div>
 
-      <div className="flex h-[50vh] items-center justify-center bg-white">
-        <div className="flex h-[65%] w-[40%] flex-row ">
+      <div className="flex py-[5%] items-center justify-center bg-white">
+        <div className="flex py-10 h-[65%] w-[80%] lg:w-[40%] flex-col items-center lg:flex-row ">
           <div className="flex h-full w-[50%] flex-col items-center pr-2">
             <div id="map" className="h-[100%] w-[100%] bg-red-300">
-              {/* <MapIntegration /> */}
+              {/* <MapIntegration /> */}maps placeholder
             </div>
           </div>
-          <div className="flex w-[50%] flex-col justify-center pl-2">
-            <h2 className="flex pt-2 text-5xl font-extrabold text-[#3D2C93]">
+          <div className="flex lg:w-[50%] flex-col justify-center pl-2">
+            <h2 className="flex pt-2 lg:text-left text-center text-5xl font-extrabold text-[#3D2C93]">
               The Score Campus Headquarters
             </h2>
-            <p className="flex flex-row py-4 text-black">
+            <p className="flex flex-row py-4 text-black lg:text-left text-center">
               The Score Campus Headquarters is built for students by students- a
               space for inspiration, natural learning and excellence. It is one
               big educational playground where lessons permeate every corner.{" "}
@@ -384,19 +392,19 @@ export default function Home() {
               Students come in excited to explore, experiment, dissect,
               synthesize and put into action abstract lessons learned in school.
             </p>
-            <button className="mt-5 flex h-10 w-40 flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold">
+            <button className="mt-5 flex h-10 w-40 lg:self-start self-center flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold">
               <BsFillTelephoneFill className="mr-2" /> Contact Us
             </button>
           </div>
         </div>
       </div>
 
-      <div className="bg-saturdaysuperheroes flex h-[60vh] flex-col items-center justify-center bg-white bg-cover bg-center ">
-        <div className="flex w-[50%] flex-col pr-10">
+      <div className="flex py-[5%] flex-col items-center justify-center bg-white bg-saturdaysuperheroes bg-cover bg-right ">
+        <div className="flex w-[80%] lg:w-[50%] flex-col py-10 pr-10">
           <h2 className="flex text-left text-5xl font-extrabold text-white">
             What makes us different?
           </h2>
-          <p className="flex flex-row pt-4 text-left text-white">
+          <p className="flex flex-row pt-4 text-left lg:text-base text-lg text-white">
             We start at an early age – we accept students as young as 7!{" "}
             <br></br>
             As classes get harder, it is important to address challenges early
@@ -433,14 +441,14 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex h-[60vh] flex-col items-center justify-center bg-white bg-cover ">
-        <div className="flex w-[50%] flex-col items-center justify-center pr-10 align-middle">
-          <h2 className="flex text-center text-6xl font-extrabold text-black">
+      <div className="flex py-[5%] flex-col items-center justify-center bg-white bg-cover ">
+        <div className="flex w-[80%] lg:w-[45%] flex-col items-center justify-center align-middle">
+          <h2 className="flex text-center text-6xl pb-4 font-extrabold text-black">
             What parents and kids have to say about Score Campus
           </h2>
           <div className="flex flex-row">
             <FaQuoteLeft className="mr-8 h-20 w-40 fill-gray-300" />
-            <p className="flex flex-col pt-4 text-center text-black">
+            <p className="flex flex-col pt-4 lg:text-base text-lg text-center text-black">
               I am going to be honest here. Working with the coaches of Score
               Campus was a challenge. Matthew got 5/100 for all his subjects
               when I brought him there the first time. Matthew was on medication
@@ -452,7 +460,7 @@ export default function Home() {
               do this? He replied, “The coaches built me a table to stand and do
               my work. Every time I got a right answer, he gave hugs, high fives
               and the genius cookie!” <br></br>
-              <span className="pt-4 text-lg text-black">
+              <span className="pt-4 lg:text-lg text-xl text-black">
                 - Serene, Mother of Matthew
               </span>
             </p>
@@ -461,7 +469,7 @@ export default function Home() {
 
           <div className="flex flex-row">
             <FaQuoteLeft className="mr-8 h-20 w-40 fill-gray-300" />
-            <p className="flex flex-col pt-4 text-center text-black">
+            <p className="flex flex-col pt-4 lg:text-base text-lg text-center text-black">
               They have a method. It involves, inpiration, independence and
               trust. You just have to trust them. My kid was in the 30s to 40s
               range and I was losing my mind. The coaches didnt over promise.
@@ -472,7 +480,7 @@ export default function Home() {
               Not only that, she went to Express. If you are a parent with a kid
               struggling in Primary 5 or PSLE, bring them to Score Campus.{" "}
               <br></br>
-              <span className="pt-4 text-lg text-black">
+              <span className="pt-4 lg:text-lg text-xl text-black">
                 - Mary, Mother of Liz.
               </span>
             </p>
@@ -484,8 +492,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-educationsupport flex h-[80vh] flex-col items-center justify-center bg-cover bg-center">
-        <div className="mr-[30%] flex w-[30%] flex-col">
+      <div className="flex py-[5%] flex-col items-center justify-center bg-educationsupport bg-cover bg-right">
+        <div className="lg:mr-[30%] flex w-[80%] lg:w-[35%] flex-col">
           <h2 className="flex text-4xl font-extrabold text-white">
             Let Score Campus be your PARTNER in raising self-sufficient, happy,
             and successful children.
@@ -503,7 +511,7 @@ export default function Home() {
               src="/images/dave.jpg"
               height={350}
               width={350}
-              className="h-20 w-20 rounded-full object-cover "
+              className="h-[30%] w-[30%] lg:h-28 lg:w-28 rounded-full object-cover "
             />
             <p className="flex flex-col pl-2 text-white">
               JUNIORS AGE 7-11 Coach Dave: <br></br> +6590402225
@@ -513,7 +521,7 @@ export default function Home() {
               src="/images/Ira.jpg"
               height={350}
               width={350}
-              className="ml-8 h-20 w-20 rounded-full object-cover"
+              className="ml-8 h-[30%] w-[30%] lg:h-28 lg:w-28 rounded-full object-cover"
             />
             <p className="flex flex-col pl-2 text-white">
               SENIORS AGE 11-17 Coach Ira: <br></br> +6591822117
@@ -523,24 +531,41 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex h-[40vh] flex-row items-center justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] align-middle">
+      <div className="flex py-[2%] flex-row items-center justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] align-middle">
         <Image
           alt="Hero Image"
           src="/images/heroes.png"
           height={350}
           width={350}
         />
-        <div className="w-[40%] flex flex-col">
-        <Image
-          alt="Hero Image"
-          src="/images/sc-icon-2.png"
-          height={100}
-          width={200}
-        />
-        <p><span className="text-2xl font-bold text-[#DF4787]">*Everyday Superhero</span> noun [C];</p>
-        <p>Inspired people with intelligence, resilience, compassion and a strong will to succeed and make this a better world for everyone.</p>
-        <p><span className="text-2xl font-bold text-[#DF4787]">*Everyday Superhero</span> noun [C];</p>
-        <p>Inspired teachers making a positive change in the educational system and the lives of each student so they may blossom into Everyday Superheroes.</p>       
+        <div className="flex w-[30%] flex-col">
+          <Image
+            alt="Hero Image"
+            src="/images/sc-icon-2.png"
+            height={100}
+            width={200}
+          />
+          <p>
+            <span className="text-2xl font-bold text-[#DF4787]">
+              *Everyday Superhero
+            </span>{" "}
+            noun [C];
+          </p>
+          <p>
+            Inspired people with intelligence, resilience, compassion and a
+            strong will to succeed and make this a better world for everyone.
+          </p>
+          <p>
+            <span className="text-2xl font-bold text-[#DF4787]">
+              *Everyday Superhero
+            </span>{" "}
+            noun [C];
+          </p>
+          <p>
+            Inspired teachers making a positive change in the educational system
+            and the lives of each student so they may blossom into Everyday
+            Superheroes.
+          </p>
         </div>
       </div>
     </main>
