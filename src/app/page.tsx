@@ -16,7 +16,7 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 
 const MapIntegration = () => {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyAsbK4luJt5XReqAgCVo0zCqod9wKXJe8o",
+    googleMapsApiKey: "INSERT YOUR API KEY HERE",
   });
   const mapCenter = { lat: 1.3521, lng: 103.8198 };
   if (!isLoaded) return null;
@@ -30,7 +30,8 @@ const MapIntegration = () => {
 };
 
 function Form() {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log(e, "form submitted")
     e.preventDefault();
     // Add your form submission logic here
   };
