@@ -13,6 +13,7 @@ import {
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import React from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import ReactPlayer from "react-player";
 
 const MapIntegration = () => {
   const { isLoaded } = useJsApiLoader({
@@ -94,7 +95,19 @@ function Form() {
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
-      <div className="flex h-[100vh] flex-col items-center justify-center text-center ">
+      
+      <div className="flex h-[100vh] flex-col items-center justify-center text-center bg-gradient-to-br from-[#2f4dc4]/80 to-[#df4787]/80 bg-opacity-10">
+      <ReactPlayer
+        url="https://www.youtube.com/embed/AE6x4w0CVL0?controls=0&rel=0&playsinline=1&enablejsapi=1&origin=https%3A%2F%2Fscorecampus.com&widgetid=1%22"
+        // url="/public/images/sc.mp4"
+        playing={true}
+        loop={true}
+        muted={true}
+        width="100%"
+        height="100%"
+        className="absolute m-[-5%] z-[-1] object-cover"
+      />
+
         <div className="flex min-w-[60rem] max-w-[50vw] flex-col place-content-center self-center lg:flex-row">
           <div className="flex w-full flex-col place-content-center self-center lg:mr-10 lg:w-[30%]">
             <div className="flex justify-center align-middle">
@@ -155,7 +168,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex py-[5%] flex-col items-center justify-center bg-white text-center align-middle">
+
+      
+      <div className="flex flex-col items-center justify-center bg-white py-[5%] text-center align-middle">
         <h2 className="flex text-center text-6xl font-extrabold text-[#3D2C93]">
           Score Campus Live
         </h2>
@@ -167,8 +182,8 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="flex py-[10%] justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] ]">
-        <div className="flex w-[80%] flex-col justify-center place-self-center lg:flex-row lg:w-[60vw] ">
+      <div className="] flex justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] py-[10%]">
+        <div className="flex w-[80%] flex-col justify-center place-self-center lg:w-[60vw] lg:flex-row ">
           <div className="flex flex-col items-center justify-center px-4 text-center align-middle  text-5xl font-extrabold lg:w-[33%] lg:text-left">
             Enroll your child for these ongoing programs:
             <button className="mb-6 mt-10 flex h-10 w-40 flex-row items-center justify-center self-center rounded-md bg-[#2F4DC4] text-base font-semibold lg:self-start">
@@ -236,9 +251,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex py-[8%] justify-center bg-white">
-        <div className="flex w-[80%] flex-col justify-center place-self-center lg:flex-row lg:w-[60vw] ">
-          <div className="flex py-12 flex-col items-center justify-center px-4 text-center align-middle  text-5xl font-extrabold text-[#3D2C93] lg:w-[33%] lg:text-left">
+      <div className="flex justify-center bg-white py-[8%]">
+        <div className="flex w-[80%] flex-col justify-center place-self-center lg:w-[60vw] lg:flex-row ">
+          <div className="flex flex-col items-center justify-center px-4 py-12 text-center align-middle  text-5xl font-extrabold text-[#3D2C93] lg:w-[33%] lg:text-left">
             Reserve a slot for these upcoming camps:
             <button className="mb-6 mt-10 flex h-10 w-40 flex-row items-center justify-center self-center rounded-md bg-[#2F4DC4] text-base font-semibold text-white lg:self-start">
               <BsFillTelephoneFill className="mr-2" /> Contact Us
@@ -280,8 +295,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex py-[7%] justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] ">
-        <div className="flex w-[80%] flex-col justify-center place-self-center lg:flex-row lg:w-[60vw] ">
+      <div className="flex justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] py-[7%] ">
+        <div className="flex w-[80%] flex-col justify-center place-self-center lg:w-[60vw] lg:flex-row ">
           <div className="flex flex-col items-center justify-center px-4 text-center align-middle  text-5xl font-extrabold lg:w-[33%] lg:text-left">
             Our other programs and platforms:
             <button className="mb-6 mt-10 flex h-10 w-40 flex-row items-center justify-center self-center rounded-md bg-[#2F4DC4] text-base font-semibold lg:self-start">
@@ -317,9 +332,8 @@ export default function Home() {
         </div>
       </div>
 
-
-      <div className="flex py-[7%] items-center justify-center bg-white">
-        <div className="flex h-[65%] lg:w-[50%] items-center flex-col lg:flex-row ">
+      <div className="flex items-center justify-center bg-white py-[7%]">
+        <div className="flex h-[65%] flex-col items-center lg:w-[50%] lg:flex-row ">
           <div className="flex w-[70%] flex-col items-center ">
             <Image
               alt="Hero Image"
@@ -336,7 +350,7 @@ export default function Home() {
             </p>
           </div>
           <div className="flex w-[70%] flex-col justify-center  pl-2">
-            <h2 className="flex pt-2 text-5xl lg:text-left text-center font-extrabold text-[#3D2C93]">
+            <h2 className="flex pt-2 text-center text-5xl font-extrabold text-[#3D2C93] lg:text-left">
               Support your child to the fullest.
             </h2>
             <p className="flex flex-row py-4 text-black">
@@ -366,25 +380,25 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex py-[5%] flex-col items-center justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] align-middle">
-        <h2 className="flex pt-2 text-5xl text-center font-bold">
+      <div className="flex flex-col items-center justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] py-[5%] align-middle">
+        <h2 className="flex pt-2 text-center text-5xl font-bold">
           “The highest form of research is essentially play.”
         </h2>
         <p className="pt-4 text-2xl">~ N. V. Scarfe, education researcher</p>
       </div>
 
-      <div className="flex py-[5%] items-center justify-center bg-white">
-        <div className="flex py-10 h-[65%] w-[80%] lg:w-[40%] flex-col items-center lg:flex-row ">
+      <div className="flex items-center justify-center bg-white py-[5%]">
+        <div className="flex h-[65%] w-[80%] flex-col items-center py-10 lg:w-[40%] lg:flex-row ">
           <div className="flex h-full w-[50%] flex-col items-center pr-2">
             <div id="map" className="h-[100%] w-[100%] bg-red-300">
               {/* <MapIntegration /> */}maps placeholder
             </div>
           </div>
-          <div className="flex lg:w-[50%] flex-col justify-center pl-2">
-            <h2 className="flex pt-2 lg:text-left text-center text-5xl font-extrabold text-[#3D2C93]">
+          <div className="flex flex-col justify-center pl-2 lg:w-[50%]">
+            <h2 className="flex pt-2 text-center text-5xl font-extrabold text-[#3D2C93] lg:text-left">
               The Score Campus Headquarters
             </h2>
-            <p className="flex flex-row py-4 text-black lg:text-left text-center">
+            <p className="flex flex-row py-4 text-center text-black lg:text-left">
               The Score Campus Headquarters is built for students by students- a
               space for inspiration, natural learning and excellence. It is one
               big educational playground where lessons permeate every corner.{" "}
@@ -392,19 +406,19 @@ export default function Home() {
               Students come in excited to explore, experiment, dissect,
               synthesize and put into action abstract lessons learned in school.
             </p>
-            <button className="mt-5 flex h-10 w-40 lg:self-start self-center flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold">
+            <button className="mt-5 flex h-10 w-40 flex-row items-center justify-center self-start self-center rounded-md bg-[#2F4DC4] text-base font-semibold lg:self-start">
               <BsFillTelephoneFill className="mr-2" /> Contact Us
             </button>
           </div>
         </div>
       </div>
 
-      <div className="flex py-[5%] flex-col items-center justify-center bg-white bg-saturdaysuperheroes bg-cover bg-right ">
-        <div className="flex w-[80%] lg:w-[50%] flex-col py-10 pr-10">
+      <div className="flex flex-col items-center justify-center bg-white bg-saturdaysuperheroes bg-cover bg-right py-[5%] ">
+        <div className="flex w-[80%] flex-col py-10 pr-10 lg:w-[50%]">
           <h2 className="flex text-left text-5xl font-extrabold text-white">
             What makes us different?
           </h2>
-          <p className="flex flex-row pt-4 text-left lg:text-base text-lg text-white">
+          <p className="flex flex-row pt-4 text-left text-lg text-white lg:text-base">
             We start at an early age – we accept students as young as 7!{" "}
             <br></br>
             As classes get harder, it is important to address challenges early
@@ -441,14 +455,14 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex py-[5%] flex-col items-center justify-center bg-white bg-cover ">
-        <div className="flex w-[80%] lg:w-[45%] flex-col items-center justify-center align-middle">
-          <h2 className="flex text-center text-6xl pb-4 font-extrabold text-black">
+      <div className="flex flex-col items-center justify-center bg-white bg-cover py-[5%] ">
+        <div className="flex w-[80%] flex-col items-center justify-center align-middle lg:w-[45%]">
+          <h2 className="flex pb-4 text-center text-6xl font-extrabold text-black">
             What parents and kids have to say about Score Campus
           </h2>
           <div className="flex flex-row">
             <FaQuoteLeft className="mr-8 h-20 w-40 fill-gray-300" />
-            <p className="flex flex-col pt-4 lg:text-base text-lg text-center text-black">
+            <p className="flex flex-col pt-4 text-center text-lg text-black lg:text-base">
               I am going to be honest here. Working with the coaches of Score
               Campus was a challenge. Matthew got 5/100 for all his subjects
               when I brought him there the first time. Matthew was on medication
@@ -460,7 +474,7 @@ export default function Home() {
               do this? He replied, “The coaches built me a table to stand and do
               my work. Every time I got a right answer, he gave hugs, high fives
               and the genius cookie!” <br></br>
-              <span className="pt-4 lg:text-lg text-xl text-black">
+              <span className="pt-4 text-xl text-black lg:text-lg">
                 - Serene, Mother of Matthew
               </span>
             </p>
@@ -469,7 +483,7 @@ export default function Home() {
 
           <div className="flex flex-row">
             <FaQuoteLeft className="mr-8 h-20 w-40 fill-gray-300" />
-            <p className="flex flex-col pt-4 lg:text-base text-lg text-center text-black">
+            <p className="flex flex-col pt-4 text-center text-lg text-black lg:text-base">
               They have a method. It involves, inpiration, independence and
               trust. You just have to trust them. My kid was in the 30s to 40s
               range and I was losing my mind. The coaches didnt over promise.
@@ -480,7 +494,7 @@ export default function Home() {
               Not only that, she went to Express. If you are a parent with a kid
               struggling in Primary 5 or PSLE, bring them to Score Campus.{" "}
               <br></br>
-              <span className="pt-4 lg:text-lg text-xl text-black">
+              <span className="pt-4 text-xl text-black lg:text-lg">
                 - Mary, Mother of Liz.
               </span>
             </p>
@@ -492,8 +506,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex py-[5%] flex-col items-center justify-center bg-educationsupport bg-cover bg-right">
-        <div className="lg:mr-[30%] flex w-[80%] lg:w-[35%] flex-col">
+      <div className="flex flex-col items-center justify-center bg-educationsupport bg-cover bg-right py-[5%]">
+        <div className="flex w-[80%] flex-col lg:mr-[30%] lg:w-[35%]">
           <h2 className="flex text-4xl font-extrabold text-white">
             Let Score Campus be your PARTNER in raising self-sufficient, happy,
             and successful children.
@@ -511,7 +525,7 @@ export default function Home() {
               src="/images/dave.jpg"
               height={350}
               width={350}
-              className="h-[30%] w-[30%] lg:h-28 lg:w-28 rounded-full object-cover "
+              className="h-[30%] w-[30%] rounded-full object-cover lg:h-28 lg:w-28 "
             />
             <p className="flex flex-col pl-2 text-white">
               JUNIORS AGE 7-11 Coach Dave: <br></br> +6590402225
@@ -521,7 +535,7 @@ export default function Home() {
               src="/images/Ira.jpg"
               height={350}
               width={350}
-              className="ml-8 h-[30%] w-[30%] lg:h-28 lg:w-28 rounded-full object-cover"
+              className="ml-8 h-[30%] w-[30%] rounded-full object-cover lg:h-28 lg:w-28"
             />
             <p className="flex flex-col pl-2 text-white">
               SENIORS AGE 11-17 Coach Ira: <br></br> +6591822117
@@ -531,7 +545,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex py-[2%] flex-row items-center justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] align-middle">
+      <div className="flex flex-row items-center justify-center bg-gradient-to-br from-[#2f4dc4] to-[#df4787] py-[2%] align-middle">
         <Image
           alt="Hero Image"
           src="/images/heroes.png"
