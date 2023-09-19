@@ -21,7 +21,8 @@ const screenwidth = window.innerWidth;
 
 const MapIntegration = () => {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "INSERT YOUR API KEY HERE",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GMAP_API_KEY as string,
+    libraries: ["places"],
   });
   const mapCenter = { lat: 1.3521, lng: 103.8198 };
   if (!isLoaded) return null;
@@ -30,7 +31,14 @@ const MapIntegration = () => {
       center={mapCenter}
       zoom={10}
       mapContainerStyle={{ width: "100%", height: "100%" }}
-    ></GoogleMap>
+      options={{
+        panControl: false,
+        streetViewControl: false,
+        mapTypeControl: false,
+      }}
+    >
+      <Marker position={mapCenter} />
+    </GoogleMap>
   );
 };
 
@@ -379,7 +387,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="flex flex-col items-center justify-center"
         >
-          <div className="flex h-[65%] flex-col self-center items-center lg:w-[50%] lg:flex-row ">
+          <div className="flex h-[65%] flex-col items-center self-center lg:w-[50%] lg:flex-row ">
             <div className="flex w-[70%] flex-col items-center ">
               <Image
                 alt="Hero Image"
@@ -465,8 +473,8 @@ export default function Home() {
         >
           <div className="flex h-[65%] w-[80%] flex-col items-center py-10 lg:w-[40%] lg:flex-row ">
             <div className="flex h-full w-[50%] flex-col items-center pr-2">
-              <div id="map" className="h-[100%] w-[100%] bg-red-300">
-                {/* <MapIntegration /> */}maps placeholder
+              <div id="map" className="h-64 w-full bg-red-300">
+                <MapIntegration />
               </div>
             </div>
             <div className="flex flex-col justify-center pl-2 lg:w-[50%]">
