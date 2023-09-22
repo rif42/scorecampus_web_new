@@ -11,13 +11,11 @@ import {
   FaQuoteRight,
 } from "react-icons/fa";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import dynamic from "next/dynamic";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 import { motion } from "framer-motion";
-
-const screenwidth = window.innerWidth;
 
 const MapIntegration = () => {
   const { isLoaded } = useJsApiLoader({
@@ -105,6 +103,10 @@ function Form() {
 }
 
 export default function Home() {
+  const [screenwidth, setScreenWith] = useState(1000);
+  useEffect(()=>{
+    setScreenWith(window?.innerWidth)
+  },[])
   return (
     <main className="flex min-h-screen flex-col overflow-hidden">
       <div
