@@ -13,7 +13,7 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { useEffect, useRef, useMemo } from "react";
 
 
-function Map({ address }) {
+function Map({ address }:{address:string}) {
   const mapRef = useRef(null);
 const geocoder = useMemo(() => new google.maps.Geocoder(), []);
 useEffect(() => {
