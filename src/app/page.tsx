@@ -11,11 +11,15 @@ import {
   FaQuoteRight,
 } from "react-icons/fa";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import dynamic from "next/dynamic";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 import { motion } from "framer-motion";
+import ContactUsBtn from "./components/ContactUsBtn";
+import { toast } from "react-hot-toast";
+import Script from "next/script";
+import Link from "next/link";
 
 const MapIntegration = () => {
   const { isLoaded } = useJsApiLoader({
@@ -40,22 +44,46 @@ const MapIntegration = () => {
   );
 };
 
+
+type WindoWithRecaptcha = Window & {
+  grecaptcha: UniversalType;
+};
+
+declare const window: WindoWithRecaptcha;
+
 function Form() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(e, "form submitted");
+  const [loading, setLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null)
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your form submission logic here
+    const form = new FormData(formRef?.current as HTMLFormElement);
+    setLoading(true)
+    if (window.grecaptcha) {
+      window.grecaptcha.ready(function () {
+        window.grecaptcha
+          .execute(process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY, {action: 'submit'})
+          .then(async function (token: string) {
+            const response = await fetch('/api/mails', {
+              method:'POST',
+              body: JSON.stringify({...Object.fromEntries(form), captchaToken: token})
+            })
+            if(response.ok) toast.success('Thank you, we already received your email!')
+            else toast.error((await response.json())?.message ?? 'Sorry, failed to send email, try again later')
+            setLoading(false)
+          });
+      });
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} ref={formRef}>
       {/* Other form inputs go here */}
       <label htmlFor="name">Your Name</label>
       <input
         name="name"
         id="name"
         type="text"
-        className="mb-2 mt-1 flex h-10 w-full flex-row items-center justify-center rounded-md bg-white text-black"
+        className="mb-2 mt-1 flex h-10 px-2 w-full flex-row items-center justify-center rounded-md bg-white text-black"
       />
 
       <label htmlFor="email">Your Email</label>
@@ -63,7 +91,8 @@ function Form() {
         name="email"
         id="email"
         type="email"
-        className="mb-2 mt-1 flex h-10 w-full flex-row items-center justify-center rounded-md bg-white text-black"
+        required
+        className="mb-2 mt-1 flex h-10 px-2 w-full flex-row items-center justify-center rounded-md bg-white text-black"
       />
 
       <label htmlFor="phone">Your Phone</label>
@@ -71,8 +100,9 @@ function Form() {
         id="phone"
         name="phone"
         type="tel"
-        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-        className="mb-2 mt-1 flex h-10 w-full flex-row items-center justify-center rounded-md bg-white text-black"
+        // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+        className="mb-2 mt-1 flex h-10 px-2 w-full flex-row items-center justify-center rounded-md bg-white text-black"
+        required
       />
 
       <label htmlFor="subject">Your Subject</label>
@@ -80,7 +110,8 @@ function Form() {
         name="subject"
         id="subject"
         type="text"
-        className="mb-2 mt-1 flex h-10 w-full flex-row items-center justify-center rounded-md bg-white text-black"
+        className="mb-2 mt-1 flex h-10 px-2 w-full flex-row items-center justify-center rounded-md bg-white text-black"
+        required
       />
 
       <label htmlFor="message">Your Message</label>
@@ -88,16 +119,16 @@ function Form() {
         name="message"
         id="message"
         placeholder="Drag the bottom right corner to adjust text area size"
-        className="mb-2 mt-1 flex h-10 w-full flex-row items-center justify-center rounded-md bg-white text-black"
+        className="mb-2 mt-1 flex h-10 px-2 w-full flex-row items-center justify-center rounded-md bg-white text-black"
       />
 
-      <input
-        name="submit"
+      <button
         id="submit"
         type="submit"
-        value="Submit"
-        className="mt-10 flex h-10 w-40 flex-row items-center justify-center rounded-md bg-[#DF4787]  text-base font-semibold"
-      />
+        className="mt-10 text-white flex h-10 w-40 flex-row items-center justify-center rounded-md bg-[#DF4787]  text-base font-semibold"
+      >
+        {loading?'Loading..':'Submit'}
+      </button>
     </form>
   );
 }
@@ -108,6 +139,7 @@ export default function Home() {
     setScreenWith(window?.innerWidth)
   },[])
   return (
+    <>
     <main className="flex min-h-screen flex-col overflow-hidden">
       <div
         onClick={() => {
@@ -155,7 +187,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="flex w-[90%] flex-col items-center self-center pt-1 lg:w-[70%] lg:pr-10 lg:pt-8">
+          <div className="flex w-[90%] flex-col items-center self-center pt-1 lg:w-[70%] lg:pr-10 lg:pt-8 relative z-10">
             <h1 className="flex text-4xl font-extrabold lg:self-start lg:text-6xl">
               SCORE CAMPUS.
             </h1>
@@ -175,15 +207,15 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col gap-2 pt-4 lg:flex-row lg:self-start">
-              <button className="flex h-6 w-52 flex-col items-center justify-center rounded-md bg-blue-500 text-base font-semibold lg:h-10">
+              <a href="https://app.scorecampus.com" target="_blank" className="flex h-6 w-52 flex-col items-center justify-center rounded-md bg-blue-500 text-base font-semibold lg:h-10">
                 ScoreCampus Live
-              </button>
-              <button className="flex h-6 w-52 flex-col items-center justify-center rounded-md bg-red-500 font-semibold lg:h-10">
+              </a>
+              <a  href="https://getletsflip.com" target="_blank" className="flex h-6 w-52 flex-col items-center justify-center rounded-md bg-red-500 font-semibold lg:h-10">
                 ScoreCampus Connect
-              </button>
-              <button className="flex h-6 w-52 flex-col items-center justify-center rounded-md bg-yellow-500 font-semibold lg:h-10">
+              </a>
+              <Link href="/" className="flex h-6 w-52 flex-col items-center justify-center rounded-md bg-yellow-500 font-semibold lg:h-10">
                 ScoreCampus Pro
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -202,9 +234,7 @@ export default function Home() {
           <p className="flex py-6 text-lg text-black">
             Level up and power up the Everyday Superhero* in your child!
           </p>
-          <button className="flex h-10 w-40 flex-row items-center justify-center rounded-md bg-[#2F4DC4] font-semibold">
-            <BsFillTelephoneFill className="mr-2" /> Contact Us
-          </button>
+          <ContactUsBtn/>
         </motion.div>
       </div>
 
@@ -218,9 +248,7 @@ export default function Home() {
           <div className="flex w-[80%] flex-col justify-center place-self-center lg:w-[60vw] lg:flex-row ">
             <div className="flex flex-col items-center justify-center px-4 text-center align-middle  text-5xl font-extrabold lg:w-[33%] lg:text-left">
               Enroll your child for these ongoing programs:
-              <button className="mb-6 mt-10 flex h-10 w-40 flex-row items-center justify-center self-center rounded-md bg-[#2F4DC4] text-base font-semibold lg:self-start">
-                <BsFillTelephoneFill className="mr-2" /> Contact Us
-              </button>
+              <ContactUsBtn/>
             </div>
             <div className="flex flex-col items-start justify-center border-x-[0px] border-y-[5px] border-dotted border-white px-4 py-8 lg:w-[34%] lg:border-x-[5px] lg:border-y-[0px] lg:py-0">
               <p className="text-lg">Weekdays!</p>
@@ -235,7 +263,6 @@ export default function Home() {
                 Monday to Friday, 4 to 8pm. <br></br>2 hours each of :
               </p>
               <p className="flex flex-row pt-4">
-                {" "}
                 <FaRunning className="mr-0.5 h-[25px] w-[25px] fill-[#6EC1E4]" />{" "}
                 Physical & mental fitness coaching.
               </p>
@@ -247,11 +274,11 @@ export default function Home() {
                 P1-P6: English, Maths, and Science Secondary school: Biology,
                 Physics & Chemistry
               </p>
-              <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787]  font-semibold">
+              <a href="/#contact-us" className="mt-10 flex text-white h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787]  font-semibold">
                 <FaRegLightbulb className="mr-2" /> Sign Up
-              </button>
+              </a>
             </div>
-            <div className="flex flex-col items-start justify-center border-b-[5px] border-dotted border-white px-4 py-8 lg:w-[33%] lg:border-b-[0px] lg:py-0">
+            <div className="flex flex-col items-start justify-center  border-b-[5px] border-dotted border-white px-4 py-8 lg:w-[33%] lg:border-b-[0px] lg:py-0">
               <p className="text-lg">Saturday!</p>
               <h2 className="flex pt-2 text-3xl font-bold">
                 Saturday Superheroes
@@ -278,9 +305,9 @@ export default function Home() {
                 <FaRegLightbulb className="mr-1.5 h-[23px] w-[23px] fill-[#6EC1E4]" />{" "}
                 Project-based learning.
               </p>
-              <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787]  font-semibold">
+              <a  href="/#contact-us" className="mt-10 text-white flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787]  font-semibold">
                 <FaRegLightbulb className="mr-2" /> Sign Up
-              </button>
+              </a>
             </div>
           </div>
         </motion.div>
@@ -296,9 +323,7 @@ export default function Home() {
           <div className="flex w-[80%] flex-col justify-center place-self-center lg:w-[60vw] lg:flex-row ">
             <div className="flex flex-col items-center justify-center px-4 py-12 text-center align-middle  text-5xl font-extrabold text-[#3D2C93] lg:w-[33%] lg:text-left">
               Reserve a slot for these upcoming camps:
-              <button className="mb-6 mt-10 flex h-10 w-40 flex-row items-center justify-center self-center rounded-md bg-[#2F4DC4] text-base font-semibold text-white lg:self-start">
-                <BsFillTelephoneFill className="mr-2" /> Contact Us
-              </button>
+             <ContactUsBtn/>
             </div>
             <div className="flex flex-col items-start justify-center border-x-[0px] border-y-[5px] border-dotted border-black px-4 py-8 text-black lg:w-[34%] lg:border-x-[5px] lg:border-y-[0px] lg:py-0">
               <p className="text-lg">
@@ -312,9 +337,9 @@ export default function Home() {
                 <br></br>
                 Recommended age: 7 to 17 years old <br></br>
               </p>
-              <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787] font-semibold  text-white">
+              <a  href="https://thenextlevelcamp.com/#contact-us" target="_blank" className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787] font-semibold  text-white">
                 <FaRegLightbulb className="mr-2" /> Sign Up
-              </button>
+              </a>
             </div>
             <div className="flex flex-col items-start justify-center border-b-[5px] border-dotted border-black px-4 py-8 text-black lg:w-[33%] lg:border-b-[0px] lg:py-0">
               <p className="text-lg">
@@ -329,9 +354,9 @@ export default function Home() {
                 Recommended age: 7 to 17 years old <br></br>
               </p>
 
-              <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787] font-semibold  text-white">
+              <a href="/#contact-us" className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787] font-semibold  text-white">
                 <FaRegLightbulb className="mr-2" /> Sign Up
-              </button>
+              </a>
             </div>
           </div>
         </motion.div>
@@ -347,9 +372,7 @@ export default function Home() {
           <div className="flex w-[80%] flex-col justify-center place-self-center lg:w-[60vw] lg:flex-row ">
             <div className="flex flex-col items-center justify-center px-4 text-center align-middle  text-5xl font-extrabold lg:w-[33%] lg:text-left">
               Our other programs and platforms:
-              <button className="mb-6 mt-10 flex h-10 w-40 flex-row items-center justify-center self-center rounded-md bg-[#2F4DC4] text-base font-semibold lg:self-start">
-                <BsFillTelephoneFill className="mr-2" /> Contact Us
-              </button>
+              <ContactUsBtn/>
             </div>
             <div className="flex flex-col items-start justify-center border-x-[0px] border-y-[5px] border-dotted border-white px-4 py-8 lg:w-[34%] lg:border-x-[5px] lg:border-y-[0px] lg:py-0">
               <h2 className="flex pt-2 text-3xl font-bold">
@@ -360,12 +383,12 @@ export default function Home() {
                 <br></br>
               </p>
               <div className="mt-10 flex w-full flex-row flex-wrap gap-2">
-                <button className="flex h-10 w-40 flex-row items-center justify-center rounded-md bg-[#DF4787]  font-semibold">
+                <a href="https://getletsflip.com" target="_blank" className="flex text-white h-10 w-40 flex-row items-center justify-center rounded-md bg-[#DF4787]  font-semibold">
                   <FaRegLightbulb className="mr-2" /> Get Lets Flip
-                </button>
-                <button className="flex h-10 w-36 flex-row items-center justify-center rounded-md bg-[#3D2C93]  font-semibold">
+                </a>
+                <a href="https://app.scorecampus.com" target="_blank" className="flex text-white h-10 w-36 flex-row items-center justify-center rounded-md bg-[#3D2C93]  font-semibold">
                   <FaRegLightbulb className="mr-2" /> SC Portal
-                </button>
+                </a>
               </div>
             </div>
             <div className="flex flex-col items-start justify-center border-b-[5px] border-dotted border-white px-4 py-8 lg:w-[33%] lg:border-b-[0px] lg:py-0">
@@ -373,9 +396,9 @@ export default function Home() {
               <p className="pt-4 text-lg">
                 Programs for teachers and aspiring education superheroes
               </p>
-              <button className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787]  font-semibold">
+              <Link href="/" className="mt-10 flex h-10 w-36 text-white flex-row items-center justify-center self-start rounded-md bg-[#DF4787]  font-semibold">
                 <FaRegLightbulb className="mr-2" /> Learn More
-              </button>
+              </Link>
             </div>
           </div>
         </motion.div>
@@ -441,9 +464,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <button className="my-5 flex h-10 w-40 flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold">
-                <BsFillTelephoneFill className="mr-2" /> Contact Us
-              </button>
+              <ContactUsBtn/>
             </div>
           </div>
         </motion.div>
@@ -492,9 +513,7 @@ export default function Home() {
                 synthesize and put into action abstract lessons learned in
                 school.
               </p>
-              <button className="mt-5 flex h-10 w-40 flex-row items-center justify-center self-start rounded-md bg-[#2F4DC4] text-base font-semibold lg:self-start">
-                <BsFillTelephoneFill className="mr-2" /> Contact Us
-              </button>
+              <ContactUsBtn/>
             </div>
           </div>
         </motion.div>
@@ -543,9 +562,7 @@ export default function Home() {
               With this mindset and a love for learning, one can conquerany
               obstacle and emerge a champion.
             </p>
-            <button className="mt-5 flex h-10 w-40 flex-row items-center justify-center rounded-md bg-[#2F4DC4] text-base font-semibold">
-              <BsFillTelephoneFill className="mr-2" /> Contact Us
-            </button>
+            <ContactUsBtn/>
           </div>
         </motion.div>
       </div>
@@ -603,14 +620,12 @@ export default function Home() {
               </p>
               <FaQuoteLeft className="mt-4 w-20 fill-gray-300 lg:ml-8 lg:h-20 lg:w-40" />
             </div>
-            <button className="mt-5 flex h-10 w-40 flex-row items-center justify-center rounded-md bg-[#2F4DC4] text-base font-semibold">
-              <BsFillTelephoneFill className="mr-2" /> Contact Us
-            </button>
+            <ContactUsBtn/>
           </div>
         </motion.div>
       </div>
 
-      <div className="bg-educationsupport bg-cover bg-right py-[5%]">
+      <div className="bg-educationsupport bg-cover bg-right py-[5%]" id="contact-us">
         <motion.div
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
@@ -702,5 +717,9 @@ export default function Home() {
         </div>
       </div>
     </main>
+          <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY}&trustedtypes=true`}
+        />
+        </>
   );
 }
