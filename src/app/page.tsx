@@ -20,6 +20,7 @@ import ContactUsBtn from "./components/ContactUsBtn";
 import { toast } from "react-hot-toast";
 import Script from "next/script";
 import Link from "next/link";
+import Events from "./components/Events";
 
 const MapIntegration = () => {
   const { isLoaded } = useJsApiLoader({
@@ -320,45 +321,7 @@ export default function Home() {
           transition={{ duration: 0.75 }}
           viewport={{ once: true }}
         >
-          <div className="flex w-[80%] flex-col justify-center place-self-center lg:w-[60vw] lg:flex-row ">
-            <div className="flex flex-col items-center justify-center px-4 py-12 text-center align-middle  text-5xl font-extrabold text-[#3D2C93] lg:w-[33%] lg:text-left">
-              Reserve a slot for these upcoming camps:
-             <ContactUsBtn/>
-            </div>
-            <div className="flex flex-col items-start justify-center border-x-[0px] border-y-[5px] border-dotted border-black px-4 py-8 text-black lg:w-[34%] lg:border-x-[5px] lg:border-y-[0px] lg:py-0">
-              <p className="text-lg">
-                Happening from June 14 to 20, 2023 in Singapore & Malaysia!
-              </p>
-              <h2 className="flex pt-2 text-3xl font-bold text-[#3D2C93]">
-                The Next Level Camp
-              </h2>
-              <p className="pt-4 text-lg">
-                Bring out the champion in your child through a 5 to 7-day camp.{" "}
-                <br></br>
-                Recommended age: 7 to 17 years old <br></br>
-              </p>
-              <a  href="https://thenextlevelcamp.com/#contact-us" target="_blank" className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787] font-semibold  text-white">
-                <FaRegLightbulb className="mr-2" /> Sign Up
-              </a>
-            </div>
-            <div className="flex flex-col items-start justify-center border-b-[5px] border-dotted border-black px-4 py-8 text-black lg:w-[33%] lg:border-b-[0px] lg:py-0">
-              <p className="text-lg">
-                Happening from June 5 to 8, 2023 in Singapore!
-              </p>
-              <h2 className="flex pt-2 text-3xl font-bold text-[#3D2C93]">
-                Saturday Superheroes
-              </h2>
-              <p className="pt-4 text-lg">
-                Turning ideas into reality through a 4-day camp for start-ups.{" "}
-                <br></br>
-                Recommended age: 7 to 17 years old <br></br>
-              </p>
-
-              <a href="/#contact-us" className="mt-10 flex h-10 w-36 flex-row items-center justify-center self-start rounded-md bg-[#DF4787] font-semibold  text-white">
-                <FaRegLightbulb className="mr-2" /> Sign Up
-              </a>
-            </div>
-          </div>
+       <Events/>
         </motion.div>
       </div>
 
